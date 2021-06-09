@@ -3,7 +3,7 @@ uint8_t DisBuff[2 + 5 * 5 * 3];
 const int n_average = 20;
 bool isFlashing = false;
 unsigned long lastDisplayTime = 0; //
-const unsigned long flashTimeInterval = 50;
+const unsigned long flashTimeInterval = 100;
 const unsigned long sensorTimeInterval = 20;
 bool IMU6886Flag = false;
 unsigned long currentTime = millis();
