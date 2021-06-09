@@ -1,7 +1,3 @@
-/*
- Single pixel blink for 250ms
- */
-
 #include "M5Atom.h"
 
 void setup() 
@@ -12,7 +8,7 @@ void setup()
 
 void loop() 
 {
-  M5.dis.drawpix(2, 2, 0xffffff);
+  M5.dis.drawpix(2,2, 0xffffff);
   Serial.println(F("Pixel is on"));
   delay(250);
   M5.dis.clear();

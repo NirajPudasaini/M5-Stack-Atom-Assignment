@@ -8,6 +8,7 @@
 
 #include "M5Atom.h"
 uint8_t DisBuff[2 + 5 * 5 * 3];
+
 void setBuff(uint8_t Rdata, uint8_t Gdata, uint8_t Bdata)
 {
   DisBuff[0] = 0x05;
@@ -20,7 +21,11 @@ void setBuff(uint8_t Rdata, uint8_t Gdata, uint8_t Bdata)
   }
 }
 
-float deacceleratingThreshold = 0.1;
+float LOW_threshold = 100;
+
+float scaledAccX = 0;
+float scaledAccY = 0;
+float scaledAccZ = 0;
 
 float accX = 0;
 float accY = 0;
@@ -61,6 +66,8 @@ void loop()
     setBuff(0x00, 0x00, 0x00);
     M5.dis.displaybuff(DisBuff);
     delay(40);
+    M5.dis.clear();
+    delay(40);
     break;
   case 1:
     setBuff(0xff, 0x00, 0x00);
@@ -78,7 +85,11 @@ void loop()
     break;
   case 3:
     M5.IMU.getAccelData(&accX, &accY, &accZ);
-    if (abs(accX) > deacceleratingThreshold && abs(accY) > deacceleratingThreshold&& abs(accZ) > deacceleratingThreshold)
+    scaledAccX = accX * 1000;
+    scaledAccY = accY * 1000;
+    scaledAccZ = accZ * 1000;
+
+    if ((abs(scaledAccX) > LOW_threshold) && (abs(scaledAccY) > LOW_threshold))
     {
       setBuff(0xff, 0x00, 0x00);
       M5.dis.displaybuff(DisBuff);
@@ -91,13 +102,19 @@ void loop()
     {
       setBuff(0xff, 0x00, 0x00);
       M5.dis.displaybuff(DisBuff);
+
       delay(40);
+      
     }
     break;
 
   case 4:
     M5.IMU.getAccelData(&accX, &accY, &accZ);
-     if ((abs(accX) > deacceleratingThreshold) && (abs(accY) > deacceleratingThreshold))
+    scaledAccX = accX * 1000;
+    scaledAccY = accY * 1000;
+    scaledAccZ = accZ * 1000;
+
+    if ((abs(scaledAccX) > LOW_threshold) && (abs(scaledAccY) > LOW_threshold))
     {
       setBuff(0x80, 0x80, 0x80);
       M5.dis.displaybuff(DisBuff);
