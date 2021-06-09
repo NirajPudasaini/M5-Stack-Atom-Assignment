@@ -1,9 +1,5 @@
 # M5 Stack Atom Assignment
- Assignment 2
 
-<<<<<<< Updated upstream
-This is a readme file that contains instructions on how to run th
-=======
 This is a readme file that contains instructions on what to expect while running codes on M5 Stack Atom Matrix.
 
 ## Part 1, the first (Bike light) 
@@ -30,12 +26,21 @@ screen displays nothing.
 * If the user turns the device to face-down ,exit mode is activated and the screen is deactivated but the readings of the temperature is still taken in the background.
 mode with screen off.
 * The five different modes labelled 1 to 5, are :
-1. Show Active temperature + Units
-2. Show average of last 24 hours of temperature + Units
-3. Show color scale of temperature range + current temperature as color
-4. Show graph of temperature across a predefined range.
-5. Change units
+1. Shows Active temperature + Units
+2. Shows average temperature of the device since it was running (temperature + Units), with average measured in an interval of 10 seconds.
+3. Shows color scale of temperature range + current temperature as color. The four rows and the 5 columns are used to show the actual temperature in color in the matrix. The last five LEDs of the fifth row is used to show the  the range of colors for the temperature.
+The range being : T<24 (white), 24=<T<31 (green),31=<T<40 (yellow), and T>=40 (red), where T is the temperature in celcius.
+4. Shows graph of temperature across a predefined range. For the graph, the temperature of the last 50 seconds is taken in an array, and plotted on the third row, with the latest temperature shown in the leftmost LED.
+5. Changes units. Changes the unit from Fahrenheit to celcius, and vice versa.
 
 
-## Part 2,  
->>>>>>> Stashed changes
+## Part 2 
+
+The code implements a die-based(LUDO) and a spinning based(ROULETTE) game as a real and virtual game spinner.
+The device can be interacted virtually with the network named "Group22", and the password "DandI01234" through a webpage. 
+For the webpage version, the display is shown the device, depending on the button pressed (Rool the dice or Spin the roullete).
+For the physical version, the output of LUDO is shown when the device is shaked with a certain threshold. And the output of ROULETTE is shown when the device is spinned.
+If you want to learn more about how to play these games, refer to the following links:
+[Ludo game](https://www.youtube.com/watch?v=IHkRjn8XVtw&ab_channel=TripleSGames)
+[Roullete Game](https://www.youtube.com/watch?v=Gcy3_HhFbyY&ab_channel=TripleSGamesTripleSGames)
+
