@@ -10,11 +10,9 @@ After connecting the Atom Matrix with a power source, you can carry out differen
 * After you press the button, LEDs strobe in red color at a predetermined interval of 100 milli seconds.
 * Similarly, after pressing button again, LEDs strobe at a predetermined interval of 100 milli seconds, but in white color.
 * Now, after the third press of button, the device constantly checks if there is a deacceleration to detect the braking event.
-If a braking event is determined, then the lights turn solid for an interval when the device is in braking event, then returns to strobe when the devices isn't in braking event
-
-iii. Manual Front strobe (WHITE): LEDs strobe at a predetermined interval
-iv. Automatic Rear Mode Rear (RED): LEDs are solid during a braking event. Return to strobe when riding.
-v. Automatic Front Mode Rear (White): LEDs are solid during a brak
+If a braking event is detected then the lights turn solid for that interval then returns to strobe when the devices isn't in braking event.
+Red light is used to mimic the Automatic Rear Mode of the vehicle.
+* Similar to the previous point, white light turns solid in the braking event, and returns to strobe at other conditions. White light is used to mimic the Automatic Front Mode of the vehicle.
 
 
 
