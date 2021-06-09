@@ -15,7 +15,6 @@ Red light is used to mimic the Automatic Rear Mode of the vehicle.
 * Similar to the previous point, white light turns solid in the braking event, and returns to strobe at other conditions. White light is used to mimic the Automatic Front Mode of the vehicle.
 
 
-
 ## Part 1, the second (Sensing Temperature)
 
 After connecting the Atom Matrix with a power source, you can carry out different modes as follows: 
@@ -35,4 +34,3 @@ iii. Show color scale of temperature range + current temperature as color
 iv. Show graph of temperature across a predefined range.
 v. Change units
 
-## Part 2,  
