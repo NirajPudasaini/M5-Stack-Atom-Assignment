@@ -1,9 +1,10 @@
+
 #include "M5Atom.h"
 uint8_t DisBuff[2 + 5 * 5 * 3];
 const int n_average = 20;
 bool isFlashing = false;
 unsigned long lastDisplayTime = 0; //
-const unsigned long flashTimeInterval = 100;
+const unsigned long flashTimeInterval = 50;
 const unsigned long sensorTimeInterval = 20;
 bool IMU6886Flag = false;
 unsigned long currentTime = millis();
@@ -13,7 +14,7 @@ bool isDeaccelerating = false;
 float accX = 0, newAccX = 0, accX_avg = 0;
 float accY = 0, newAccY = 0, accY_avg = 0;
 float accZ = 0, newAccZ = 0, accZ_avg = 0;
-void checkDeaccelerating(float oldAccX, float oldAccY)
+void checkDeaccelerating()
 {
   float accX = 0, accY = 0, accZ = 0;
   M5.IMU.getAccelData(&accX, &accY, &accZ);
@@ -28,7 +29,7 @@ void checkDeaccelerating(float oldAccX, float oldAccY)
   Serial.printf("accX is ");
   Serial.print(accX_avg);
 
-  if ((accX_avg - accX) > deacceleratingThreshold && (accY_avg - accY)>deacceleratingThreshold)
+  if ((accX_avg - accX) > deacceleratingThreshold && (accY_avg - accY) > deacceleratingThreshold)
   {
     isDeaccelerating = true;
   }
@@ -36,7 +37,7 @@ void checkDeaccelerating(float oldAccX, float oldAccY)
   {
     isDeaccelerating = false;
   }
-  oldAccX = accX; oldAccY = accY;
+
 }
 
 void setBuff(uint8_t Rdata, uint8_t Gdata, uint8_t Bdata)
@@ -70,7 +71,12 @@ void flashColor(uint8_t Rdata, uint8_t Gdata, uint8_t Bdata)
     lastDisplayTime = currentTime;
   }
 }
-
+void solidColor(uint8_t Rdata, uint8_t Gdata, uint8_t Bdata)
+{
+  setBuff(Rdata, Gdata, Bdata);
+  M5.dis.displaybuff(DisBuff);
+  delay(100);
+}
 void setup()
 {
   M5.begin(true, false, true);
@@ -118,7 +124,7 @@ void loop()
       }
     case 2:
       {
-       // Serial.printf("At case 2");
+        // Serial.printf("At case 2");
         flashColor(0x60, 0x60, 0x60);
         Serial.printf("flashing red");
         break;
@@ -127,13 +133,10 @@ void loop()
       {
         Serial.printf("At case 3, : ");
         M5.IMU.getAccelData(&accX, &accY, &accZ);
-        delay(40);
-        checkDeaccelerating(accX, accY);
+        checkDeaccelerating();
         if (isDeaccelerating)
         {
-          setBuff(0xff, 0x00, 0x00);
-          M5.dis.displaybuff(DisBuff);
-          delay(100);
+          solidColor(0xff, 0x00, 0x00);
         }
         else
           flashColor(0xff, 0x00, 0x00);
@@ -143,17 +146,14 @@ void loop()
       {
         Serial.printf("At case 4");
         M5.IMU.getAccelData(&accX, &accY, &accZ);
-        delay(40);
-        checkDeaccelerating(accX, accY);
+        checkDeaccelerating();
         if (isDeaccelerating)
         {
-          setBuff(0x60, 0x60, 0x60);
-          M5.dis.displaybuff(DisBuff);
-          //delay(100);
+          solidColor(0x60, 0x60, 0x60);
         }
         else
           flashColor(0x60, 0x60, 0x60);
-      break;
+        break;
       }
   }
   M5.update();
