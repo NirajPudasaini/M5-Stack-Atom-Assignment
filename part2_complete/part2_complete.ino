@@ -119,7 +119,7 @@ void drawArray(const int arr[], int colors[])
 int currentModeIs(float x, float y, float z)
 {
   {
-    if (accX >= 0.85 &&  accY <= 0.1 && accZ <= 0.1 && currentMode < 1) {
+    if (accX >= 0.9 &&  abs(accY) <= 0.1 && abs(accZ) <= 0.1 && currentMode < 1) {
       rightMove = true;
     }
 
@@ -127,7 +127,7 @@ int currentModeIs(float x, float y, float z)
       midMove = true;
     }
 
-    if (accX <= -0.8 &&  accY <= 0.1 && accZ <= 0.1 && currentMode >= 0) {
+    if (accX <= -0.9 &&  abs(accY) <= 0.1 && abs(accZ) <= 0.1 && currentMode >= 0) {
       leftMove = true;
     }
 
